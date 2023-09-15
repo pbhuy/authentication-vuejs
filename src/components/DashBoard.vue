@@ -16,6 +16,18 @@
         <router-link to="/signin">Explore me</router-link>
       </div>
     </div>
+    <img src="../assets/symbol.png" alt="" />
+    <div class="home-icon">
+      <a href="https://www.facebook.com/pbhuy09" target="_blank"
+        ><i class="bx bxl-facebook"></i
+      ></a>
+      <a href="https://www.linkedin.com/in/pbhuy" target="_blank"
+        ><i class="bx bxl-linkedin"></i
+      ></a>
+      <a href="https://github.com/pbhuy" target="_blank"
+        ><i class="bx bxl-github"></i
+      ></a>
+    </div>
   </section>
 </template>
 
@@ -24,7 +36,7 @@ export default {
   name: "HomePage",
   data() {
     return {
-      name: "Pham Huy",
+      name: "",
     };
   },
 };
@@ -108,5 +120,79 @@ export default {
 }
 .btn-box a:hover::before {
   width: 100%;
+}
+.home-icon {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 40px;
+  width: 170px;
+}
+.home-icon a {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 2px solid var(--mint);
+  border-radius: 50%;
+  color: var(--mint);
+  text-decoration: none;
+  font-size: 20px;
+  z-index: 1;
+  overflow: hidden;
+  transition: var(--smooth);
+}
+.home-icon a:hover {
+  color: var(--dark-white);
+}
+.home-icon a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--mint);
+  z-index: -1;
+  transition: var(--smooth);
+}
+.home-icon a:hover::before {
+  width: 100%;
+}
+.home img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 1440px) {
+  .home {
+    padding: 20px 12%;
+    transition: var(--smooth);
+  }
+  .home-content {
+    padding: 10px 0;
+    margin: 0px 20px;
+  }
+  .home img {
+    width: 50%;
+    margin-right: -150px;
+    transition: var(--smooth);
+  }
+}
+@media (max-width: 1280px) {
+  .home {
+    padding: 14px 2%;
+    transition: var(--smooth);
+  }
+  .home-content {
+    padding: 10px 0;
+    margin: 0px 20px;
+  }
+  .home img {
+    width: 50%;
+    transition: var(--smooth);
+  }
 }
 </style>

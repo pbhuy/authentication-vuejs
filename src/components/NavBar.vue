@@ -97,14 +97,14 @@ button:hover {
 @media (max-width: 1280px) {
   header {
     padding: 14px 2%;
-    transition: 0.3s all ease-in;
+    transition: var(--smooth);
   }
   .navbar a {
     padding: 5px 0;
     margin: 0px 20px;
   }
 }
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
   .main i {
     display: inline-block;
   }
@@ -112,14 +112,15 @@ button:hover {
     position: absolute;
     top: 100%;
     right: -100%;
-    width: 270px;
-    height: 17vh;
+    width: 200px;
+    height: 29vh;
     background: var(--mint);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 10px;
     transition: var(--smooth);
+    margin-right: 50px;
   }
   .navbar a {
     display: block;

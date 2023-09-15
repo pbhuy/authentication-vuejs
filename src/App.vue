@@ -32,6 +32,8 @@ body {
   background-image: url("/src/assets/bg.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
   height: 100vh;
 }
