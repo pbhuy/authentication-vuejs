@@ -4,21 +4,29 @@
     <div class="form">
       <form action="#">
         <h2>Register</h2>
-        <div class="input_box">
+        <div class="input_box fullname">
           <input
-            type="email"
-            name=""
-            id=""
-            placeholder="Enter your email"
+            id="fname"
+            type="text"
+            placeholder="Enter first name"
             required
           />
+          <i class="bx bx-user fname"></i>
+          <input
+            id="lname"
+            type="text"
+            placeholder="Enter last name"
+            required
+          />
+          <i class="bx bx-user lname"></i>
+        </div>
+        <div class="input_box">
+          <input type="email" placeholder="Enter your email" required />
           <i class="bx bx-envelope email"></i>
         </div>
         <div class="input_box">
           <input
             type="password"
-            name=""
-            id=""
             placeholder="Enter your password"
             required
             ref="pwd"
@@ -26,15 +34,13 @@
           <i class="bx bx-lock-alt password"></i>
           <i
             class="bx pwd_hide"
-            @click="showPassword()"
+            @click="showPassword"
             :class="showPwd ? 'bx-hide' : 'bx-show'"
           ></i>
         </div>
         <div class="input_box">
           <input
             type="password"
-            name=""
-            id=""
             placeholder="Enter repeat password"
             required
             ref="repwd"
@@ -42,9 +48,25 @@
           <i class="bx bx-lock-alt password"></i>
           <i
             class="bx pwd_hide"
-            @click="showRepeatPassword()"
+            @click="showRepeatPassword"
             :class="showRePwd ? 'bx-hide' : 'bx-show'"
           ></i>
+        </div>
+        <div class="input_box">
+          <input
+            type="text"
+            placeholder="Enter your phone (optional)"
+            required
+          />
+          <i class="bx bx-phone phone"></i>
+        </div>
+        <div class="input_box">
+          <input
+            type="text"
+            placeholder="Enter your address (optional)"
+            required
+          />
+          <i class="bx bx-map address"></i>
         </div>
         <div class="optional">
           <span class="checkbox">
@@ -91,7 +113,7 @@ export default {
 }
 .container {
   position: absolute;
-  max-width: 360px;
+  max-width: 450px;
   width: 100%;
   top: 50%;
   left: 50%;
@@ -129,6 +151,45 @@ export default {
   width: 100%;
   height: 50px;
 }
+.input_box.fullname {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+}
+.input_box.fullname input:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 30px;
+  color: #333;
+  border-bottom: 1.5px solid #aaaaaa;
+  transition: var(--smooth);
+  font-size: 14px;
+}
+.input_box.fullname input:nth-child(2) {
+  width: 50%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 30px;
+  margin: 0 auto;
+  color: #333;
+  border-bottom: 1.5px solid #aaaaaa;
+  transition: var(--smooth);
+  font-size: 14px;
+}
+.input_box.fullname i:last-child {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateY(70%) translateX(-10%);
+  font-size: 20px;
+  color: #707070;
+}
 .input_box input {
   width: 100%;
   height: 100%;
@@ -138,9 +199,15 @@ export default {
   color: #333;
   border-bottom: 1.5px solid #aaaaaa;
   transition: var(--smooth);
-  font-size: 15px;
+  font-size: 14px;
 }
 .input_box input:focus {
+  border-color: var(--mint);
+}
+.input_box.fullname input:nth-child(1):focus {
+  border-color: var(--mint);
+}
+.input_box.fullname input:nth-child(2):focus {
   border-color: var(--mint);
 }
 .input_box i {
@@ -151,11 +218,19 @@ export default {
   color: #707070;
 }
 .input_box i.email,
+.input_box i.fname,
+.input_box i.lname,
+.input_box i.phone,
+.input_box i.address,
 .input_box i.password {
   left: 0;
 }
 
 .input_box input:focus ~ i.email,
+.input_box input:focus ~ i.fname,
+.input_box input:focus ~ i.lname,
+.input_box input:focus ~ i.phone,
+.input_box input:focus ~ i.address,
 .input_box input:focus ~ i.password {
   color: var(--mint);
 }

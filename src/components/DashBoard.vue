@@ -2,9 +2,10 @@
   <section class="home">
     <div class="home-content">
       <h1>
-        Hi, I'm <span>{{ name }}</span>
+        Hi <span v-if="user">{{ user.first_name }} {{ user.last_name }}</span
+        ><span v-if="!user">guys</span>
       </h1>
-      <h3>Backend Developer</h3>
+      <!-- <h3>Backend Developer</h3> -->
       <p>
         Our project focuses on building a secure authentication and
         authorization system using Node.js, Express, and Vue.js. This system
@@ -12,8 +13,9 @@
         user-friendly experience.
       </p>
       <div class="btn-box">
-        <router-link to="/signin">Get started</router-link>
-        <router-link to="/signin">Explore me</router-link>
+        <router-link v-if="!user" to="/signup">Get started</router-link>
+        <router-link v-if="user" to="/">Get started</router-link>
+        <router-link to="/about">Explore me</router-link>
       </div>
     </div>
     <img src="../assets/symbol.png" alt="" />
@@ -32,12 +34,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "HomePage",
-  data() {
-    return {
-      name: "",
-    };
+  computed: {
+    ...mapGetters(["user"]),
   },
 };
 </script>

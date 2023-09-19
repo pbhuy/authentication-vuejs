@@ -2,7 +2,7 @@
   <div class="container">
     <router-link to="/"><i class="bx bx-x form_close"></i></router-link>
     <div class="form">
-      <form action="#" method="post" @submit.prevent="handleSubmit()">
+      <form action="#" method="post" @submit.prevent="handleSubmit">
         <h2>Login</h2>
         <div class="input_box">
           <input
@@ -13,7 +13,7 @@
           />
           <i class="bx bx-envelope email"></i>
         </div>
-
+        <span class="error" v-if="error">{{ error }}</span>
         <div class="input_box">
           <input
             type="password"
@@ -25,10 +25,11 @@
           <i class="bx bx-lock-alt password"></i>
           <i
             class="bx pwd_hide"
-            @click="showPassword()"
+            @click="showPassword"
             :class="showPwd ? 'bx-hide' : 'bx-show'"
           ></i>
         </div>
+        <span class="error" v-if="error">{{ error }}</span>
         <div class="optional">
           <span class="checkbox">
             <input type="checkbox" name="" id="check" />
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginPage",
   data() {
@@ -54,6 +56,7 @@ export default {
       showPwd: false,
       email: "",
       password: "",
+      error: "",
     };
   },
   methods: {
@@ -61,9 +64,17 @@ export default {
       this.showPwd = !this.showPwd;
       this.$refs.pwd.type = this.showPwd ? "text" : "password";
     },
-    handleSubmit() {
-      console.log(this.email);
-      console.log(this.password);
+    async handleSubmit() {
+      let response = null;
+      const body = { email: this.email, password: this.password };
+      try {
+        response = await axios.post("/users/signin", body);
+        localStorage.setItem("access_token", response.headers["authorization"]);
+        this.$store.dispatch("user", response.data.data);
+        this.$router.push("/");
+      } catch (error) {
+        this.error = error.response.data.error.message;
+      }
     },
   },
 };
@@ -138,7 +149,6 @@ export default {
 .input_box i.password {
   left: 0;
 }
-
 .input_box input:focus ~ i.email,
 .input_box input:focus ~ i.password {
   color: var(--mint);
@@ -146,6 +156,10 @@ export default {
 .input_box i.pwd_hide {
   right: 0;
   font-size: 20px;
+}
+.error {
+  font-size: 0.8rem;
+  color: red;
 }
 .optional {
   display: flex;
